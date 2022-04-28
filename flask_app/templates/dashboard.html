@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard_style.css') }}">
+    <title>Paintings</title>
+</head>
+    <body>
+        <div class="container">
+            <div class="nav-container">
+                <div>
+                    <h1>Welcome {{ user.first_name }} {{ user.last_name }}!</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="/paintings/new">Add Painting</a>
+                    <a href="/logout""><button class="btn btn-warning">Logout</button></a>
+                </div>
+            </div>
+            <div>
+                <h3>Paintings</h3>
+            </div>
+            <div class="content">
+                {% for this_painting in all_paintings %}
+                <p><a href="/paintings/{{ this_painting.id }}">{{ this_painting.title }} </a> by {{ this_painting.user.first_name }} {{ this_painting.user.last_name }} 
+                    {% if this_painting.user_id == session.user_id %}  
+                    ---   <a href="/paintings/{{ this_painting.id }}/edit">edit |</a><a href="/delete/{{ this_painting.id }}">  delete</a></p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

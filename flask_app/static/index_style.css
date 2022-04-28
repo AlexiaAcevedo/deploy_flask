@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.col {
+    width: 100vw;
+    margin: 0px 20px;
+}
